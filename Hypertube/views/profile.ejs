@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <% include partials/head %>
+  </head>
+  <style>
+    #Profile .profile-picture {
+        display: inline-block;
+        top: 50px;
+        max-width: 300px;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+    #Profile .profile-picture img {
+        width: 200px;
+    }
+    #Profile .profile-info {
+        display: inline-block;
+        position: absolute;
+        bottom: 10px;
+        margin: 15px;
+    }
+    #Profile .profile-label {
+        font-size: 40px;
+        color:white;
+    }
+    #Profile .profile-settings{
+        color: white !important;
+        cursor: pointer;
+        position: absolute;
+        font-size: 20px;
+        bottom: 5px;
+        right: 5px;
+    }
+
+    #file_upload {
+        color: white;
+        margin-bottom: 25px;
+    }
+
+
+  </style>
+
+  <body>
+    <div class="truc"></div>
+    <div class="page">
+      <header>
+        <% include partials/header %>
+      </header>
+      <main>
+        <div id="Profile" class="vertical-center" role="dialog">
+            <div class="modal-dialog">  
+                <div class="modal-content">
+                    
+                    <div class="modal-body">
+                        <div class="profile-picture thumbnail">
+                        <% if (locals.user.id === locals.profile.id) { %>
+                            <% if (profile.picture) { %>
+                            <button style="margin:10px" type="button" class="click pull-right" data-toggle="modal" data-target="#Picture">
+                                <img src="<%= profile.picture %>" alt="vmariot">
+                            </button>
+                            <% } else { %>
+                            <button style="margin:10px" type="button" class="click pull-right" data-toggle="modal" data-target="#Picture">
+                                <img src="https://www.super-parrain.com/images/users/anonyme2-58cc0d02d73a835b893cbfa46625d978.jpeg" alt="vmariot">
+                            </button>
+                            <% } %>
+                        <% } else {%>
+                            <% if (profile.picture) { %>
+                            <button style="margin:10px" type="button" class="click pull-right" data-toggle="modal" data-target="#Picture">
+                                <img src="<%= profile.picture %>" alt="vmariot">
+                            </button>
+                            <% } else { %>
+                            <button style="margin:10px" type="button" class="click pull-right" data-toggle="modal" data-target="#Picture">
+                                <img src="https://www.super-parrain.com/images/users/anonyme2-58cc0d02d73a835b893cbfa46625d978.jpeg" alt="vmariot">
+                            </button>
+                            <% } %>
+                        <% } %>
+                        </div>
+                        <div class="profile-info">
+                            <div class="profile-label">
+                                <%= profile.first_name%> <%= profile.last_name%>
+                            </div>
+                            <div class="profile-label">
+                                <h3><%= profile.login %></h3>
+                            </div>
+                        </div>
+                        <% if (locals.user.id === locals.profile.id) { %>
+                        <div class="profile-settings">
+                            <button style="margin:10px" type="button" class="click pull-right" data-toggle="modal" data-target="#Settings">
+                                <span class="glyphicon glyphicon-cog"></span>
+                            </button>
+                        </div>
+                        <% } %>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        <% var languages = [
+        {
+                "code": "en",
+                "name": "English"
+        },
+        {
+                "code": "fr",
+                "name": "French"
+        },
+        {
+                "code": "de",
+                "name": "German"
+        },
+        {
+                "code": "zh",
+                "name": "Chinese"
+        },
+        {
+                "code": "it",
+                "name": "Italian"
+        },
+        {
+                "code": "pt",
+                "name": "Portuguese"
+        },
+        {
+                "code": "es",
+                "name": "Spain"
+        }]
+%>
+        <% if (locals.user.id === locals.profile.id) { %>
+        <div id="Settings" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="text-center color-blue">Settings</h1>
+                    </div>
+                    <div class="modal-body">
+                        <form method="post" action="/update">
+                            <div class="row">
+                                <div class="col-md-12 color-blue">
+                                    <label>Lastname :</label>
+                                    <input name="lastname" type="text"  class="form-control input-lg" placeholder="Cooper" id="lastname_profile">
+                                </div>
+                                <div class="col-md-12 color-blue margin_top">
+                                    <label>Firstname :</label>
+                                    <input name="firstname" type="text"  class="form-control input-lg" placeholder="Sheldon" id="firstname_profile">
+                                </div>
+                                <div class="col-md-12 color-blue margin_top">
+                                    <label>Username :</label>
+                                    <input name="username" type="text"  class="form-control input-lg" placeholder="Shelly" id="username_profile">
+                                </div>
+                                <div class="col-md-12 color-blue margin_top">
+                                    <label>Email :</label>
+                                    <input name="email" type="email"  class="form-control input-lg" placeholder="scooper@student.42.fr" id="email_profile">
+                                </div>
+                                <div class="col-md-4 color-blue margin_top">
+                                    <label>Old password :</label>
+                                    <input name="opwd" type="password" class="form-control input-lg" placeholder="SpoK23675aDefc0" id="oldpassword_profile">
+                                </div>
+                                <div class="col-md-4 color-blue margin_top">
+                                    <label>Password :</label>
+                                    <input name="pwd" type="password" class="form-control input-lg" placeholder="SpoK23675aDefc0" id="password_profile">
+                                </div>
+                                <div class="col-md-4 color-blue margin_top">
+                                    <label>Confirm Password :</label>
+                                    <input name="pwd2" type="password" class="form-control input-lg" placeholder="SpoK23675aDefc0" id="passwordConfirm_profile">
+                                </div>
+                                <div class="col-md-4 color-blue margin_top col-md-offset-4">
+                                    <label>Language :</label>
+                                    <select class="form-control" name="lang">
+                                        <% languages.forEach(function(lang) { %>
+                                            <% if (profile.lang == lang.code) { %>
+                                                <option value="<%= lang.code %>" selected="true"> <%= lang.name %> </option>
+                                            <% } else { %>
+                                                <option value="<%= lang.code %>"> <%= lang.name %> </option>
+                                            <% } %>
+                                        <% }) %>
+                                    </select>
+                                </div>
+                                <div class="col-md-12 valider margin_top">
+                                    <button type="submit" class="btn prim_button btn-lg btn-block" id="submit_update">Send</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="Picture" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="text-center color-blue">Picture</h1>
+                    </div>
+                    
+                    <div class="modal-body">
+                        <div class="col-md-12 valider margin_top">
+                            <form action="/update/picture" method="post" enctype="multipart/form-data">
+                                <input id="file_upload" type="file" accept="image/*" name="userFile" size="60">
+                                <button type="submit" class="btn prim_button btn-lg btn-block">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <% } %>
+
+      </main>
+      <footer>
+        <% include partials/footer %>
+      </footer>
+    </div>
+  </body>
+</html

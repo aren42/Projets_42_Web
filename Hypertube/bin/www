@@ -1,0 +1,315 @@
+#!/usr/bin/env nodemon
+
+/**
+ * Module dependencies.
+ */
+
+var app = require('../app');
+var debug = require('debug')('repo-hyoer:server');
+var http = require('http');
+
+
+/**
+ * Get port from environment and store in Express.
+ */
+
+var port = normalizePort(process.env.PORT || '3042');
+app.set('port', port);
+
+/**
+ * Create HTTP server.
+ */
+
+var server = http.createServer(app);
+
+/**
+ * Listen on provided port, on all network interfaces.
+ */
+
+
+server.listen(port);
+server.on('error', onError);
+server.on('listening', onListening);
+
+/**
+ * Socket io 
+ */
+
+function get_movie_watch(movies, id_user, cb){
+  var models = require('../models');
+
+  if(movies){
+    movies.forEach(function(movie, i, array) {
+      models.history.findOne({where : {id_imdb : movie.id, id_user:id_user}})
+        .then(function(err) {
+          if (err){
+            movies[i].seen = 1;
+          }
+          else {
+            movies[i].seen = 0;
+          }
+          if (i == array.length - 1 && cb){
+            cb(movies)
+          }
+        })
+        .catch(function(err) {
+          cb(movies)
+        })
+    })
+  }
+}
+
+//Fonction api
+function get_imdb_content(movies, cb) {
+  _.each(movies, function (value, keys) {
+    imdb.getReq({ id: value.imdb_code }).then((things) => {
+      value.imdb = things
+    }).then((things) => {
+      if (keys == movies.length - 1 && cb) {
+        cb(movies)
+      }
+    }).catch(err => {
+      if (keys == movies.length - 1 && cb){
+        cb(movies)
+      }
+    })
+  })
+}
+
+function get_movies(params, cb) {
+  var request = require("request");
+  var id_user = params.id_user;
+  
+  request({
+      uri: 'https://yts.ag/api/v2/list_movies.json',
+      json: true,
+      qs: {
+        sort_by: params.sort,
+          order_by: params.order_by,
+          limit: 10,
+          page: params.page,
+          genre: params.genre,
+          query_term: params.query
+      }
+    }, function (err, resp, json) {
+      if (!err) {
+        var movies = json.data.movies
+        get_imdb_content(movies, function(movies) {
+          if (cb) {
+            get_movie_watch(movies, id_user, function(result) {
+              if(cb) {
+                cb(result)
+              }
+            })
+          }
+        })
+      }
+      else {
+        cb(null)
+      }
+    })
+}
+
+function send_comment(data, cb) {
+  var models = require('../models');
+
+  models.user.findOne({where : {id : data.id_user}})
+    .then(function(user) {
+      var profile = user.dataValues;
+
+      models.sequelize.sync()
+        .then(function() {
+          models.comment.create({
+            id_imdb : data.id_movie,
+            id_user : data.id_user,
+            content : data.content
+          })
+            .then(function(comment) {
+              cb(null, {
+                comment : comment.dataValues, 
+                user : {
+                  id: user.id,
+                  login: user.login || user.dataValues.email
+                }
+              })
+            })
+            .catch(function(err) {
+              cb(err, null)
+            })
+        })
+        .catch(function(err) {
+          cb(err, null)
+        })
+    })
+    .catch(function(err) {
+      cb(err, null)
+    })
+}
+
+
+function get_all_comment(data, cb) {
+  var models = require('../models');
+
+  models.comment.findAll({where : {id_imdb : data}})
+    .then(function(ret) {
+      var all_comment = [];
+
+      ret.forEach(function(comment, i, array) {
+        var _comment = comment.dataValues;
+
+        models.user.findOne({where: {id: comment.dataValues.id_user}})
+          .then(function(user) {
+            all_comment.push({
+              comment: comment.dataValues,
+              user   : {
+                id    : user.dataValues.id,
+                login : user.dataValues.login || user.dataValues.email
+              }
+            })
+            if (i == array.length - 1) {
+              cb(null, all_comment)
+            }
+          })
+          .catch(function(err) {
+            cb(err, null)
+          })
+      })
+    })
+    .catch(function(err) {
+      cb(err, null)
+    })
+}
+
+
+
+// Necessaire pour config socket + API
+var imdb = require('imdb-api');
+var Promise = require('bluebird');
+var _ = require("underscore");
+var cookieParser = require('cookie-parser')('42424242');
+var cookieSession = require('cookie-session')
+var session = cookieSession({
+  name: 'session',
+  keys: ['42424242'],
+  maxAge: 24 * 60 * 60 * 1000
+})
+
+var io = require('socket.io').listen(server);
+
+// io accessibles au routes
+app.use(function(req, res, next) {
+    req.io = io;
+    next();
+});
+
+// session accesible au routes
+
+// session accessible a socket io 
+io.use(function(socket, next) {
+    var req = socket.handshake;
+    var res = {};
+    cookieParser(req, res, function(err) {
+        if (err) return next(err);
+        session(req, res, next);
+    });
+});
+
+
+
+// event
+io.on('connection', function(socket){
+  console.log('a user connected');
+  if (socket.handshake.session.passport && socket.handshake.session.passport.user) {
+    var user = socket.handshake.session.passport.user;
+  }
+  if (user && user.id) {
+    socket.join(user.id);
+    socket.on('get_page', function(data) {
+      get_movies(data, function(page) {
+        io.to(user.id).emit('send_page', page);
+      });
+    });
+    socket.on('send_comment', function(data) {
+      send_comment(data, function(err, comment) {
+        if (err) {
+          console.log(err)
+          return false;
+        }
+        io.to(user.id).emit('view_comment',comment);
+      });
+    });
+    socket.on('get_all_comments', function(data) {
+      get_all_comment(data, function(err, comments) {
+        if (err) {
+          console.log(err)
+          return false;
+        }
+        io.to(user.id).emit('view_all_comments', comments);
+      });
+    });
+  }
+  socket.on('disconnect', function(){
+    console.log('user disconnected');
+  });
+});
+
+
+/**
+ * Normalize a port into a number, string, or false.
+ */
+
+function normalizePort(val) {
+  var port = parseInt(val, 10);
+
+  if (isNaN(port)) {
+    // named pipe
+    return val;
+  }
+
+  if (port >= 0) {
+    // port number
+    return port;
+  }
+
+  return false;
+}
+
+/**
+ * Event listener for HTTP server "error" event.
+ */
+
+function onError(error) {
+  if (error.syscall !== 'listen') {
+    throw error;
+  }
+
+  var bind = typeof port === 'string'
+    ? 'Pipe ' + port
+    : 'Port ' + port;
+
+  // handle specific listen errors with friendly messages
+  switch (error.code) {
+    case 'EACCES':
+      console.error(bind + ' requires elevated privileges');
+      process.exit(1);
+      break;
+    case 'EADDRINUSE':
+      console.error(bind + ' is already in use');
+      process.exit(1);
+      break;
+    default:
+      throw error;
+  }
+}
+
+/**
+ * Event listener for HTTP server "listening" event.
+ */
+
+function onListening() {
+  var addr = server.address();
+  var bind = typeof addr === 'string'
+    ? 'pipe ' + addr
+    : 'port ' + addr.port;
+  debug('Listening on ' + bind);
+}

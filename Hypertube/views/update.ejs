@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <% include partials/head %>
+  </head>
+
+  <body>
+    <div class="truc"></div>
+    <div class="page">
+      <header>
+        <% include partials/header %>
+      </header>
+      <main>
+        <form action="/update" method="post">
+          <input type="text"     name="username"  placeholder="Username"><br>
+          <input type="password" name="opwd"      placeholder="Old password"><br>
+          <input type="password" name="pwd"       placeholder="Password"><br>
+          <input type="password" name="pwd2"      placeholder="Re-type password"><br>
+          <input type="text"     name="email"     placeholder="Email"><br>
+          <input type="text"     name="firstname" placeholder="First name"><br>
+          <input type="text"     name="lastname"  placeholder="Last name"><br>
+          <input type="submit">
+        </form>
+      </main>
+      <footer>
+        <% include partials/footer %>
+      </footer>
+    </div>
+  </body>
+</html>

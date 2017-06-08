@@ -1,0 +1,60 @@
+<!-- views/rechercher.ejs -->
+<% include body/header.ejs %>
+<main>
+	<div class="row">
+		<div class="container">
+			<div class="col s12">
+				<row>
+					<h3 class="center">Rechercher</h3>
+					<div class="input-field col s12" id="color_search">
+						<input id="search_user" type="search" autocomplete="off">
+						<label>
+							<i class="material-icons" style="margin-left: 5px;">search</i>
+						</label>
+					</div>
+					<div class="input-field col s12 range-field" style="margin-top: 0px;">
+						<p class="type">Âge :</p>
+						<div id="age_interval"></div>
+					</div>
+					<div class="input-field col s12 range-field" style="margin-top: 0px;">
+						<p class="type">Popularité :</p>
+						<div id="score_interval"></div>
+					</div>
+					<div class="input-field col s12 range-field" style="margin-top: 0px;">
+						<p class="type">Distance :</p>
+						<div id="distance_interval"></div>
+					</div>
+					<div class="input-field col s6 range-field" style="margin-top: 0px;">
+					<br>
+						<p class="type">Tags d'intérêts :</p>
+						<select id="select_tags" multiple="multiple">
+							<option selected disabled>Sélectionner</option>
+							<% for (val of tags) { %>
+								<option value=<%= val.name %> id=<%= val.id %>><%= val.name %></option>
+							<% } %>
+						</select>
+					<br>
+					</div>
+					<div class="input-field col s6 range-field" style="margin-top: 0px;">
+					<br>
+						<p class="type">Trier par :</p>
+						<select id="order_by">
+							<option selected value="none">Aucun</option>
+							<option value="age">Âge</option>
+							<option value="distance">Localisation</option>
+							<option value="popularite">Popularité</option>
+							<option value="tags">Tags</option>
+						</select>
+					<br>
+					</div>
+					<div class="progress" id="progress_search_user" style="display: none;">
+						<div class="indeterminate"></div>
+					</div>
+					<div class="kion" id="collection_search" style="display: none;"></div>
+				</row>
+			</div>
+		</div>
+	</div>
+</main>
+<% include body/footer.ejs %>
+<% include body/chat.ejs %>

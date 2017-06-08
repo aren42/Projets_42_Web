@@ -1,0 +1,17 @@
+/* ALL */
+
+@font-face {
+	font-family: mamsFont;
+	src: url(fonts/latothin.ttf);
+}
+
+body {
+	padding: 0px;
+	margin: 0px;
+	background: url('img/poke2.jpg') repeat;
+	font-family: mamsFont;
+}
+
+.install {
+	text-align: center;
+}

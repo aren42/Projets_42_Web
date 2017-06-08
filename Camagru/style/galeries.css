@@ -1,0 +1,36 @@
+/* GALERIES */
+
+.gallery {
+}
+
+.select_photo {
+	position: absolute;
+	bottom: -10em;
+	width: 100%;
+	height: 10em;
+	border: solid 0.066em #fff;
+}
+
+.gallery_photo {
+	display: block;
+	width: 100%;
+	cursor: zoom-in;
+}
+
+.gallery_txt {
+	font-size: 1.20em;
+	color: #ff9999;
+}
+
+.selector_page {
+	display: inline-block;
+
+	font-size: 5em;
+
+	margin: 0.05em;
+}
+
+.fleches {
+	font-size: 1.20em;
+	color: #ff9999;
+}

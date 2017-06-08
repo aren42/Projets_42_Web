@@ -1,0 +1,158 @@
+<!-- views/compte.ejs -->
+<% include body/header.ejs %>
+<div class="modal" id="visits_modal">
+	<div class="modal-content">
+		<row class="section">
+			<h4 class="center">Dernières visites</h4>
+			<form class="col">
+				<row>
+					<div class="progress" id="progress_visits">
+						<div class="indeterminate"></div>
+					</div>
+					<div class="collection" id="visits_list"></div>
+				</row>
+			</form>
+		</row>
+	</div>
+</div>
+<main>
+	<div class="modal" id="report_modal">
+		<div class="modal-content" style="height: 300px">
+			<row class="section">
+				<h4 class="center">Signaler</h4>
+				<p>Signaler du contenu indésirable ou un abus ?</p>
+				<form class="col">
+					<row>
+						<div class="input-field col s6"></div>
+						<select class="multiple" id="report_cause">
+							<option>Faux profil</option>
+							<option>Message abusif</option>
+						</select>
+						<label>Raison</label><br>
+						<div class="center">
+							<button class="btn" id="send_report">Signaler ce profil</button>
+						</div>
+					</row>
+				</form>
+			</row>
+		</div>
+	</div>
+	<div class="row">
+		<div class="container">
+			<% if (user.picture) { %>
+				<img class="circle responsive-img profile_pic center-block" src='<%= user.picture %>'>
+			<% } else { %>
+				<img class="circle responsive-img profile_pic center-block" src="/img/avatar_default.png">
+			<% } %>
+			<div class="center" id="btnprofile">
+				<p style="margin-bottom: 15px">Popularité : <%= user.score %></p>
+				<% if (matched) { %>
+					<a class="waves-effect waves-light btn profile_btn purple lighten-1" id="match_user">UNMATCH
+						<i class="material-icons left">favorite_border</i></a>
+				<% } else if (likeme) { %>
+					<a class="waves-effect waves-light btn profile_btn light-purple lighten-1" id="match_user">MATCH
+						<i class="material-icons left">favorite</i></a>
+				<% } else if (liked) { %>
+					<a class="waves-effect waves-light btn profile_btn red lighten-1" id="match_user">Dislike
+						<i class="material-icons left">favorite_border</i></a>
+				<% } else if (images.length > 0 && images_me.length > 0) { %>
+					<a class="waves-effect waves-light btn profile_btn green lighten-1" id="match_user">Like
+						<i class="material-icons left">favorite</i></a>
+				<% } else if (images_me.length <= 0) { %>
+					<a class="waves-effect waves-light btn profile_btn green lighten-1 disabled tooltipped" data-tooltip="Vous n'avez pas de photo de profil !">Like
+						<i class="material-icons left">favorite</i></a>
+				<% } else { %>
+					<a class="waves-effect waves-light btn profile_btn green lighten-1 disabled tooltipped" data-tooltip="L'utilisateur n'a pas de photo de profil.">Like
+						<i class="material-icons left">favorite</i></a>
+				<% } %>
+				<br>
+				<a class="waves-effect waves-light btn profile_btn red lighten-1" onclick="$('#report_modal').openModal();">Signaler
+					<i class="material-icons left">warning</i></a>
+				<% if (blocked) { %>
+					<a class="waves-effect waves-light btn profile_btn green lighten-1" id="block_user">Débloquer
+						<i class="material-icons left">block</i></a>
+				<% } else { %>
+					<a class="waves-effect waves-light btn profile_btn red lighten-1" id="block_user">Bloquer
+						<i class="material-icons left">block</i></a>
+				<% } %>
+				<br>
+				<a class="waves-effect waves-light btn profile_btn blue lighten-1" onclick="load_visits(); $('#visits_modal').openModal();">Vues
+					<i class="material-icons left">visibility</i></a>
+				<% if (user.last_visit == undefined) { %>
+					<p style="color: red; margin-top: 15px;">Aucune connexion</p>
+				<% } else if (user.last_visit == "Invalid date") { %>
+					<p style="color: green; margin-top: 15px;">En ligne</p>
+				<% } else { %>
+					<p style="margin-top: 15px;">Dernière connexion : <%= user.last_visit %></p>
+				<% } %>
+			</div>
+			<form class="col s12" style="margin-top: 10px">
+				<row>
+					<div class="input-field col s4">
+						<i class="material-icons prefix">assignment_ind</i>
+						<input style="color: black;" type="text" value='<%= user.username %>' disabled="true">
+						<label>Pseudo</label>
+					</div>
+					<div class="input-field col s4">
+						<i class="material-icons prefix">assignment_ind</i>
+						<input style="color: black;" type="text" value='<%= user.lastname %>' disabled="true">
+						<label>Nom</label>
+					</div>
+					<div class="input-field col s4">
+						<i class="material-icons prefix">assignment_ind</i>
+						<input style="color: black;" type="text" value='<%= user.firstname %>' disabled="true">
+						<label>Prénom</label>
+					</div>
+					<div class="input-field col s4">
+						<i class="material-icons prefix">face</i>
+						<input style="color: black;" type="text" value='<%= user.gender %>' disabled="true">
+						<label>Sexe</label>
+					</div>
+					<div class="input-field col s4">
+						<i class="material-icons prefix">favorite</i>
+						<input style="color: black;" type="text" value='<%= user.orientation %>' disabled="true">
+						<label>Orientation</label>
+					</div>
+					<div class="input-field col s4">
+						<i class="material-icons prefix">cake</i>
+						<input style="color: black;" type="text" value='<%= user.age %>' disabled="true">
+						<label>Âge</label>
+					</div>
+					<div class="input-field col s12">
+						<textarea class="materialize-textarea" style="color: black;"  length="300" disabled="true"><%= user.bio %></textarea>
+						<label>Bio</label>
+					</div>
+					<div class="input-field col s12">
+						<h6>Intérêts</h6>
+						<div class="card" id="tags_lit">
+							<% if (tags.length <= 0) { %>
+								<p>Cet utilisateur n'a pas d'intérêts !</p>
+							<% } %>
+							<% for (val of tags) { %>
+								<div class="tagou" id='<%= val.id %>'><%= val.name %></div>
+							<% } %>
+						</div>
+					</div>
+					<div class="input-field col s12" id="map_profile">
+						<h6>Localisation</h6>
+						<div class="card" id="map" loc='<%= user.location %>'></div>
+					</div>
+					<div class="input-field col s12">
+						<h6>Photos</h6>
+						<div class="center" id="images_card">
+							<ul>
+								<% for (val of images) { %>
+									<li class="card small" id="image_profile">
+										<img src='<%= val.img %>'>
+									</li>
+								<% } %>
+							</ul>
+						</div>
+					</div>
+				</row>
+			</form>
+		</div>
+	</div>
+</main>
+<% include body/footer.ejs %>
+<% include body/chat.ejs %>

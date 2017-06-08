@@ -1,0 +1,13 @@
+<!-- views/index.ejs -->
+<% include body/header.ejs %>
+<main>
+	<div class="containew">
+		<div class="jumbo jumbotron text-center">
+			<h1><span class="fa fa-lock"></span> Matcha</h1>
+
+			<a onclick="$('#login').openModal();" class="btn btn-default"><span class="fa fa-user"></span> Signin</a>
+			<a href="/auth/signup" class="btn btn-default"><span class="fa fa-user"></span> Signup</a>
+		</div> 
+	</div>
+</main>
+<% include body/footer.ejs %>

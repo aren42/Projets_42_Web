@@ -1,0 +1,362 @@
+body {
+    padding: 0;
+    margin: 0;
+    min-height: 100%;
+    position: relative;
+    font-family: 'Quicksand', sans-serif !important;
+    background: #000000 url('https://image.tmdb.org/t/p/original/1LVmB5FT4qiatHdG8Mel0nwjKp6.jpg') top center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-color: rgba(0, 0, 0, 0.6) !important;
+    width: 100%;
+    height: 100%;
+}
+
+.truc {
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.6) !important;
+    height: 100%;
+    width: 100%;
+}
+
+.page {
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
+h1 {
+    font-size: 50px;
+}
+
+h2 {
+    font-size: 30px;
+}
+
+a {
+    text-decoration: none !important;
+}
+
+#logo {
+    max-width: 150px;
+    margin: 10px auto 0 auto;
+}
+
+.foothead_left {
+	margin-left: 10px;
+	float: left;
+}
+
+.foothead_right {
+	margin-right: 30px;
+	float: right;
+}
+
+footer {
+	margin-top: 150px;
+	position: fixed;
+	bottom: 0px;
+	width: 100%;
+	line-height: 50px;
+	color: rgba(51, 51, 51, 1);
+	background-color: rgba(51, 51, 51, 0.5);
+}
+
+.color-blue {
+    color: #1c4263;
+}
+
+.margin_top {
+    margin-top: 10px;
+}
+
+.margin_bot {
+    margin-bottom: 20px;
+}
+
+
+/* HEADER */
+
+.user-profile-picture {
+	height: 40px;
+	width: 40px;
+	margin: 0 20px;
+}
+
+.user-profile-picture {
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: 50% 50%;
+    border-radius: 50%;
+	margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+	.visible-sidebars {
+    	display: none;
+	}
+}
+
+.dropdown-toggle {
+	color: rgba(28, 66, 99, 1) !important;
+	background-color: transparent !important;
+}
+
+.dropdown-toggle:hover {
+    color: rgba(28, 66, 99, 0.7) !important;
+}
+
+@media (min-width: 768px) {
+	.dropdown-menu {
+		color: black !important;
+		background-color: rgba(13, 13, 13, 0.8) !important;
+	}
+
+	.dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus  {
+		color: #99ccff !important;
+		background-color: rgba(26, 26, 26, 0.8) !important;
+	}
+
+	.dropdown {
+		margin-top: 15px;
+		padding-bottom: 15px;
+	}
+}
+
+@media (max-width: 767px) {
+	.dropdown-menu {
+		color: #b3b3b3 !important;
+	}
+
+	.dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus  {
+		color: #99ccff !important;
+	}
+
+	.dropdown-toggle {
+		margin-left: 15px;
+		margin-bottom: 5px;
+	}
+}
+
+@media (min-width: 768px) {
+  .navbar-collapse {
+    float: right;
+  }
+}
+
+/* SIGNIN - SIGNUP - FORGET PASSWORD */
+
+.icon {
+    height: 100%;
+	height: 25px;
+	width: 25px;
+}
+
+.prim_button {
+    color: #fff !important;
+    background-color: rgba(51, 51, 51, 0.8) !important;
+    border-color: rgba(51, 51, 51, 0.8) !important;
+}
+
+.prim_button:hover {
+    color: #fff !important;
+    background-color: rgba(51, 51, 51, 0.6) !important;
+    border-color: rgba(51, 51, 51, 0.6) !important;
+}
+
+.default_button {
+    color: #fff !important;
+    background-color: rgba(20, 42, 82, 0.7) !important;
+    border-color: rgba(20, 42, 82, 1) !important;
+}
+
+.default_button:hover {
+    color: #fff !important;
+    background-color: rgba(20, 42, 82, 0.9) !important;
+    border-color: rgba(20, 42, 82, 1) !important;
+}
+
+.modal-dialog {
+    margin-top: 10%;
+}
+
+/* SEARCH */
+
+.btn-default {
+    color: white;
+    border-color: #275d8b;
+    background-color: #275d8b;
+}
+
+.btn-default:hover {
+    color: white;
+    border-color: #1c4263;
+    background-color: #1c4263;
+}
+
+.form-control {
+    background-color: #e0e0eb;
+}
+
+
+/* PAGE INDEX */
+
+.welcome {
+    color: white;
+    font-size: 100px;
+    text-align: center;
+    margin-top: 20%;
+    font-family: Chalkduster, fantasy;
+}
+
+.welcome:hover {
+	color: #99ccff;
+}
+
+.click {
+    margin: 15px;
+    border: none;
+    background-color: transparent;
+    color: rgba(28, 66, 99, 1) !important;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    padding: 10px 15px;
+}
+
+.click:hover {
+    color: rgba(28, 66, 99, 0.7) !important;
+    text-decoration: none;
+}
+
+.navbar-default .navbar-collapse, .navbar-default .navbar-form .navbar-toggle {
+    border-color: rgba(64, 64, 64, 0.8) !important;
+	border-top: 1px transparent;
+}
+
+.navbar-default {
+    background-color: rgba(0, 0, 0, 0.5) !important;
+    border-color: black;
+}
+
+.navbar-toggle {
+	margin-top: 15px;
+}
+
+
+/* Miniature */
+
+.caption-wrapper {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.col-md-6 {
+    width: 40%;
+    margin: 3%;
+    padding: 3%;
+}
+
+.miniaturize {
+    width: 40%;
+    color: #fff !important;
+    /*background-color: rgba(20, 42, 82, 0.7) !important;
+    border-color: rgba(20, 42, 82, 1) !important;*/
+}
+
+.movie-tile img {
+    height: 270px;
+    width: 220px;
+}
+
+.movie-tile {
+    background-color: rgba(0, 0, 0, 0.6) !important;
+    border: none;
+    padding: 5%;
+}
+
+.movie-tile:hover {
+    background-color: rgba(0, 0, 0, 0.6) !important;
+}
+
+.prim_button_min {
+    margin-left: 35%;
+    color: #fff !important;
+    background-color: rgba(51, 51, 51, 0.8) !important;
+    border-color: rgba(51, 51, 51, 0.8) !important;
+}
+
+.prim_button_min:hover {
+    color: #99ccff !important;
+    background-color: rgba(51, 51, 51, 0.6) !important;
+    border-color: rgba(51, 51, 51, 0.6) !important;
+}
+
+.caption:hover {
+    color: #99ccff !important;
+}
+
+.thumbnail:hover {
+    background-color: #99ccff !important;
+}
+
+.center_div_search {
+    margin: auto;
+    margin-bottom: 20px;
+}
+
+.center_div {
+    margin-left: 20%;
+    margin-bottom: 10px;
+}
+
+
+/* PAGE SEARCH - SCROLL UP BUTTON */
+
+.button_up {
+    position: fixed;
+    height: 50px;
+    width: 49px;
+    top: 50%;
+    left: 1%;
+    z-index: 10;
+    border-radius: 3px; line-height: 60px;
+    font-size: 40px;
+    text-align: center;
+    color: white;
+}
+
+.button_up:hover {
+    color: #275d8b;
+}
+
+.button_up_r {
+    position: fixed;
+    height: 50px;
+    width: 49px;
+    top: 50%;
+    right: 1%;
+    z-index: 10;
+    border-radius: 3px; line-height: 60px;
+    font-size: 40px;
+    text-align: center;
+    color: white;
+}
+
+.button_up_r:hover {
+    color: #275d8b;
+}
+
+.notification {
+  position:absolute;
+  top:50px;
+  right:0;
+  z-index: 100;
+  margin-right: 2%;
+}
+
+.one_notif {
+  position: relative;
+  opacity: 1;
+}

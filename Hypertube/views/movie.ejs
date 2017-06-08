@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<% include partials/head %>
+		<script src="/js/comment.js"></script>
+		<link rel="stylesheet" type="text/css" href="/stylesheets/movie.css">
+		<link href="https://cdn.jsdelivr.net/mediaelement/3.1.2/mediaelementplayer.min.css" rel="stylesheet">
+	</head>
+
+
+	<body>
+
+		<div class="truc"></div>
+		<div class="page">
+			<header>
+				<% include partials/header %>
+			</header>
+			<main>
+				<div class="col-md-12 col-sm-12">
+					<div class="col-md-12 col-sm-12">
+						<div class="title">
+							<% if (movie.title) { %>
+								<h1><%= movie.title %></h1>
+							<% } else { %>
+								<h1><%= movie.imdb.title %></h1>
+							<% } %>
+						</div>
+					</div>
+
+					<div class="col-md-6 col-sm-6">
+						<div class="thumbnail poster">
+							<% if (movie.imdb.poster) { %>
+								<img src='<%= movie.imdb.poster %>'>
+							<% } else { %>
+								<img src='<%= movie.large_cover_image %>'>
+							<% } %>
+						</div>
+					</div>
+
+					<div class="col-md-6 col-sm-6 infox">
+						Year : <%= movie.year %>
+						</br></br>
+						<% if (movie.imdb.runtime) { %>
+							Runtime : <%= movie.imdb.runtime %>
+						<% } else { %>
+							Runtime : <%= movie.runtime %> minutes
+						<% } %>
+						</br></br>
+						Rating : <%= movie.rating %>
+						</br></br>
+						<% if (movie.imdb.plot) { %>
+							Synopsis : <%= movie.imdb.plot %>
+						<% } else { %>
+							<blockquote><p>Synopsis : <%= movie.description_full %></p></blockquote>
+						<% } %>
+						</br></br>
+						<% if (movie.imdb.director) { %>
+							Director : <%= movie.imdb.director %>
+						<% } %>
+						</br></br>
+						<% if (movie.imdb.actors) { %>
+							Actors : <%= movie.imdb.actors %>
+						<% } %>
+					</div>
+				</div>
+
+				<div class="col-md-12 col-sm-12">
+						<center>
+								<% if ((locals.movie_ && locals.movie_.dataValues.is_indexed == 0) || !locals.movie_) { %>
+									<a class="btn prim_button" role="button" style="font-size: x-large;">Download</a>
+									<div class="hypHide">Waiting</div>
+								<% } else if (locals.movie_ && locals.movie_.dataValues.is_downloaded == 0) { %>
+									<div>Come back in few minute</div>
+								<% } %>
+
+								<% if (locals.movie_ && locals.movie_.dataValues.is_downloaded == 1) { %>
+								<video  id="player" width="960" height="470" controls>
+									<source src="http://localhost:3042/film/<%= movie.id%>/index.m3u8" type="application/x-mpegURL">
+									<% if (locals.sub_lang) { for (var i = sub_lang.length - 1; i >= 0; i--) { %>
+										<track label="<%= sub_lang[i].lang%>" kind="subtitles" src="<%= sub_lang[i].path%>" srclang="en" ></track>
+									<% }} %>	
+								</video>
+								<% } %>
+								<script type="text/javascript">
+								$.getScript('https://cdn.jsdelivr.net/mediaelement/3.1.2/mediaelement-and-player.min.js', function (){
+                  		$('#player').mediaelementplayer();
+                	})
+							</script>
+						</center>
+					</br></br>
+				</div>
+
+				<div class="col-md-12 col-sm-12" style="margin: 5%;">
+					<div id="comment-container" class="col-md-8 col-sm-8">
+						<h2>Comments : </h2>
+					</div>
+					<div class="col-md-8 col-sm-8">
+						<form id="send_comment">
+							<div class="input-group">
+								<input id="comment" type="text" name="comment" class="form-control" placeholder="Your comment" autocomplete="off" aria-describedby="basic-addon1">
+								<input id="user_id" name="id_user" value="<%=user.id%>" hidden>
+								<input id="movie_id" name="id_movie" value="<%=movie.id%>" hidden>
+								<span class="input-group-btn">
+									<button class="btn default_button" type="submit">Send</button>
+								</span>
+							</div>
+						</form>
+					</div>
+				</div>
+			</main>
+			<footer>
+				<% include partials/footer %>
+			</footer>
+		</div>
+		<script>
+		$(document).on('mousedown', '.btn.prim_button', function(){
+			$('.btn.prim_button').remove();
+			$('.hypHide').toggleClass('hypHide'); 
+			$.ajax({
+				url: '/film/<%= movie.id%>',
+				type: 'GET',
+				success: function(data){
+					location.reload();
+				}
+			});
+			}
+		)
+		</script>
+  	</body>
+</html>

@@ -1,0 +1,44 @@
+<div id="Signin" class="modal fade vertical-center" role="dialog">
+    <div class="modal-dialog">  
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 style="color: #1c4263;" class="text-center">Signin</h1>
+            </div>
+            <div class="modal-body">
+                <form class="form col-md-12 center-block" method="post" action="/auth/local">
+                <div class="form-group">
+                    <input id="email_login" name="email" type="email" class="form-control input-lg" placeholder="Email">
+                </div>
+                <div class="form-group">
+                    <input id="password_login" name="password" type="password" class="form-control input-lg" placeholder="Password">
+                </div>
+                <div class="form-group">
+                    <button id="login_btn" type="submit" class="btn prim_button btn-lg btn-block">Send</button>
+                    <button style="margin:10px" type="button" class="click vmariot pull-left" data-toggle="modal" data-target="#Forget">Forget password ?</button>
+                    <button style="margin:10px" type="button" class="click vmariot pull-right" data-toggle="modal" data-target="#Signup">Register now !</button>
+                </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a href="/auth/facebook">
+                    <button type="button" href="/auth/facebook" class="btn default_button"><img src="../images/FB_logo.png" class="icon"></button>
+                </a>
+                <a href="/auth/twitter">
+                    <button type="button" href="/auth/twitter" class="btn default_button"><img src="../images/Twitter_logo.png" class="icon"></button>
+                </a>
+                <a href="/auth/42">
+                    <button type="button" href="/auth/42" class="btn default_button"><img src="../images/42_logo.png" class="icon"></button>
+                </a>
+                <a href="/auth/instagram">
+                    <button type="button" href="/auth/instagram" class="btn default_button"><img src="../images/Instagram_logo.png" class="icon"></button>
+                </a>
+                <a href="/auth/github">
+                    <button type="button" href="/auth/github" class="btn default_button"><img src="../images/Github_logo.png" class="icon"></button>
+                </a>
+                <a href="/auth/linkedin">
+                    <button type="button" href="/auth/linkedin" class="btn default_button"><img src="../images/LinkedIn_logo.png" class="icon"></button>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

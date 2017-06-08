@@ -1,0 +1,77 @@
+/* INDEX */
+
+label {
+	font-size: 19px;
+}
+
+#login {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	width: 250px;
+	height: 300px;
+	margin: auto;
+	background-color: white;
+	padding: 5px;
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+#blue {
+	align-content: center;
+}
+
+.title {
+	text-align: center;
+	font-size: 25px;
+	background-color: rgba(255, 204, 204, 0.8);
+	margin-bottom: 10px;
+	color: white;
+}
+
+.lien {
+	color: rgba(62, 62, 91, 0.7);
+}
+
+.lien:hover {
+	color: rgba(62, 62, 91, 1);
+}
+
+.install {
+	margin-left: 50px;
+	color: rgb(255, 77, 77);
+}
+
+.install:hover {
+	color: rgb(255, 128, 128);
+}
+
+.sublog {
+	height: 40px;
+	background-color: rgba(255, 128, 128, 0.6);
+	border: 2px solid rgba(255, 128, 128, 0.2);
+	color: white;
+	text-align: center;
+	margin-right: auto;
+	margin-left: auto;
+	position: absolute;
+	top: 214px;
+	left: 3px;
+}
+
+.sublog:hover {
+	background-color: rgba(255, 204, 204, 1);
+	color: rgba(255, 128, 128, 1);
+	cursor: pointer;
+	-webkit-transition-duration: 0.4s;
+	transition-duration: 0.4s;
+}
+
+.putput {
+	width: 244px;
+	height: 25px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	font-size: 14px;
+}

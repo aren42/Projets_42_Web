@@ -1,0 +1,166 @@
+/* WEBCAM */
+
+.camagru {
+	position: absolute;
+	margin-top: 100px;
+	text-align: center;
+	left: 20%;
+	right: 20%;
+
+	height: 60em;
+}
+
+.button {
+	width: 60px;
+}
+
+/* UPLOAD IMG */
+
+.upload_image {
+	text-align: center;
+	margin-top: -6%;
+	font-size: 14px;
+}
+
+/* FILTERS & MINI GALLERY */
+
+.miniature_filtre {
+	display: inline;
+	height: 100px;
+	margin-left: 20px;
+}
+
+.select_filtre {
+	position: absolute;
+	padding-top: 0.5em;
+	padding-bottom: 0.5em;
+	font-size: 2em;
+	border-style: solid;
+	border-width: 0.033em 0.033em 0.033em 0.033em;
+	border-color: rgba(146, 91, 91, 0.2);
+	background-color: rgba(249, 175, 175, 0.2);
+}
+
+.miniature_photo {
+	display: block;
+	height: 5.5em;
+}
+
+.select_photo {
+	position: absolute;
+	bottom: -15%;
+	left: -10%;
+	margin-bottom: -15%;
+	font-size: 1.5em;
+	border-style: solid;
+	border-width: 0.033em 0.033em 0.033em 0.033em;
+	border-color: rgba(146, 91, 91, 0.2);
+	background-color: rgba(249, 175, 175, 0.2);
+}
+
+
+/* IMAGE */
+
+.filtre {
+	position: absolute;
+	transform: translate(-50%,0%);
+	top: 300px;
+	left: 50%;
+	width: 400px;
+	height: 300px;
+}
+
+.take_file {
+	position: absolute;
+	transform: translate(-50%,1400%);
+	padding: 4px;
+	font-size: 2em;
+	border-style: solid;
+	border-width: 0.033em 0.033em 0.033em 0.033em;
+	border-color: rgba(146, 91, 91, 0.2);
+	background-color: rgba(249, 175, 175, 0.2);
+	color: rgba(62, 62, 91, 1);
+}
+
+.take_file:hover {
+	background-color: rgba(249, 175, 175, 0.5);
+}
+
+/* PHOTOS CAMERA */
+
+.elem_pict {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 50%;
+	height: 1.25em;
+	font-size: 2em;
+	text-align: center;
+	outline: 0;
+	color: black;
+	background: transparent;
+	border: 0.033em black solid;
+	cursor: pointer;
+}
+
+.submit_pict {
+	position: absolute;
+	top: 0;
+	left: 50%;
+	width: 50%;
+	height: 1.33em;
+	font-size: 2em;
+	text-align: center;
+	outline: 0;
+	color: black;
+	background: transparent;
+	border: 0.033em black solid;
+	cursor: pointer;
+}
+
+.video {
+	position: absolute;
+	transform: translate(-100%,5%);
+	top: 15em;
+	left: 50%;
+	width: 400px;
+	height: 300px;
+}
+
+.take_photo {
+	position: absolute;
+	transform: translate(10%,750%);
+	padding: 4px;
+	font-size: 2em;
+	border-style: solid;
+	border-width: 0.033em 0.033em 0.033em 0.033em;
+	border-color: rgba(146, 91, 91, 0.2);
+	background-color: rgba(249, 175, 175, 0.2);
+	color: rgba(62, 62, 91, 1);
+}
+
+.take_photo:hover {
+	background-color: rgba(249, 175, 175, 0.5);
+}
+
+.canvas {
+	position: absolute;
+	transform: translate(-100%,185%);
+	left: 50%;
+}
+
+.save_photo {
+	position: absolute;
+	transform: translate(100%,1350%);
+	padding: 4px;
+	font-size: 2em;
+	border-style: solid;
+	border-width: 0.033em 0.033em 0.033em 0.033em;
+	border-color: rgba(146, 91, 91, 0.2);
+	background-color: rgba(249, 175, 175, 0.2);
+	color: rgba(62, 62, 91, 1);
+}
+
+.save_photo:hover {
+	background-color: rgba(249, 175, 175, 0.5);
+}

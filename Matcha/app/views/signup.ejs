@@ -1,0 +1,49 @@
+<!-- views/signup.ejs -->
+<% include body/header.ejs %>
+<main>
+	<div class="containew">
+		<h3 class="center">Inscription</h3>
+		<br>
+		<form class="col s12" id="signup_form">
+			<row>
+				<div class="input-field col s12">
+					<i class="material-icons prefix">email</i>
+					<input class="validate" id="email_signup" type="email">
+					<label for="email_signup">"Email"</label>
+				</div>
+				<div class="input-field col s6">
+					<i class="material-icons prefix">vpn_key</i>
+					<input class="validate" id="password_signup" type="password">
+					<label for="password_signup">"Mot de passe"</label>
+				</div>
+				<div class="input-field col s6">
+					<i class="material-icons prefix">vpn_key</i>
+					<input class="validate" id="passwordConfirm_signup" type="password">
+					<label for="passwordConfirm_signup">"Confirmation mot de passe"</label>
+				</div>
+				<div class="input-field col s6">
+					<i class="material-icons prefix">assignment_ind</i>
+					<input class="validate" id="username_signup" type="text">
+					<label for="username_signup">"Pseudo"</label>
+				</div>
+				<div class="input-field col s6">
+					<i class="material-icons prefix">assignment_ind</i>
+					<input class="validate" id="lastname_signup" type="text">
+					<label for="lastname_signup">"Nom"</label>
+				</div>
+				<div class="input-field col s6">
+					<i class="material-icons prefix">assignment_ind</i>
+					<input class="validate" id="firstname_signup" type="text">
+					<label for="firstname_signup">"Prénom"</label>
+				</div>
+				<div class="progress" id="progress_signup" style="display: none;">
+					<div class="indeterminate"></div>
+				</div>
+				<div class="center" id="login-button-panel">
+					<button class="btn col s6 offset-3" id="submit_signup">Save</button>
+				</div>
+			</row>
+		</form>
+	</div>
+</main>
+<% include body/footer.ejs %>

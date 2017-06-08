@@ -1,0 +1,132 @@
+<!doctype html> <!-- views/body/header.ejs -->
+<html>
+	<head>
+		<title><%= title %></title>
+		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> 
+		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+		<link rel='stylesheet' href='/stylesheets/style.css'>
+		<link rel='stylesheet' href='/stylesheets/materialize.css'>
+		<link rel='stylesheet' href='/stylesheets/nouislider.css'>
+		<link rel='stylesheet' href='/stylesheets/index.css'>
+		<link rel='stylesheet' href='/stylesheets/header.css'>
+		<link rel="shortcut icon" href="/img/favicon.ico">
+	</head>
+	<body>
+		<div class="modal" id="forgot">
+			<div class="modal-content">
+				<row class="section">
+					<h4 class="center">Réinitilisation du mot de passe</h4>
+					<p>Nous allons vous envoyer un lien pour réinitialiser votre mot de passe.</p>
+					<form class="col" id="forgotform" name="forgot">
+						<row>
+							<div class="input-field row">
+								<input class="validate" id="email_forgot" type="email">
+								<label>"Email"</label>
+							</div>
+							<div class="center" id="login-button-panel">
+								<button class="btn" id="forgot_btn">Envoyer</button>
+							</div>
+						</row>
+					</form>
+				</row>
+			</div>
+		</div>
+		<div class="modal" id="login">
+			<div class="modal-content">
+				<row class="section">
+					<h4 class="center">Login</h4>
+					<form class="col" id="loginform">
+						<row>
+							<div class="input-field row">
+								<input class="validate" id="email_login" type="email">
+								<label for="email_login">"Email"</label>
+							</div>
+							<div class="input-field row">
+								<input class="validate" id="password_login" type="password">
+								<label for="password_login">"Password"</label>
+							</div>
+							<div class="progress" id="password_login" style="display: none;">
+								<div class="indeterminate"></div>
+							</div>
+							<div class="center" id="login-button-panel">
+								<button class="btn" id="login_btn">Se connecter</button>
+							</div>
+							<div class="section center">
+								<a onclick="$('#forgot').openModal();">Mot de passe perdu ?</a>
+							</div>
+						</row>
+					</form>
+				</row>
+			</div>
+		</div>
+		<div class="modal keke" id="alerts_modal">
+			<div class="modal-content">
+				<row class="section">
+					<h4 class="center">Notifications</h4>
+					<form class="col">
+						<row>
+							<div class="progress" id="progress_alerts">
+								<div class="indeterminate"></div>
+							</div>
+							<div class="collection" id="alerts_list"></div>
+						</row>
+					</form>
+				</row>
+			</div>
+		</div>
+		<nav class="koko">
+			<div class="nav-wrapper container">
+				<a class="brand-logo" id="logo-container" href="/">Matcha</a>
+				<ul class="right hide-on-med-and-down">
+					<% if (connected) { %>
+						<li>
+							<a href="/me/" style="color: #47476b;">Mon compte</a>
+						</li>
+						<li>
+							<a href="/suggest/" style="color: #47476b;">Suggestions</a>
+						</li>
+						<li>
+							<a onclick="load_alerts(); $('#alerts_modal').openModal();" style="color: #47476b;">Notifs :
+								<span class="new badge" id="alert_nbr">0</span>
+							</a>
+						</li>
+						<li>
+							<a href="/auth/signout" style="color: #47476b;">Déconnexion</a>
+						</li>
+					<% } else { %>
+						<li>
+							<a onclick="$('#login').openModal();" style="color: #47476b;">Connexion</a>
+						</li>
+						<li>
+							<a href="/auth/signup" style="color: #47476b;">Inscription</a>
+						</li>
+					<% } %>
+				</ul>
+				<ul class="side-nav" id="nav-mobile" style="transform: translateX(-100%);">
+					<% if (connected) { %>
+						<li>
+							<a href="/me/">Mon compte</a>
+						</li>
+						<li>
+							<a href="/suggest/">Suggestions</a>
+						</li>
+						<li>
+							<a onclick="load_alerts(); $('#alerts_modal').openModal();">Notifications</a>
+						</li>
+						<li>
+							<a href="/auth/signout">Déconnexion</a>
+						</li>
+					<% } else { %>
+						<li>
+							<a onclick="$('.button-collapse').sideNav('hide'); $('#login').openModal();">Connexion</a>
+						</li>
+						<li>
+							<a href="/auth/signup">Inscription</a>
+						</li>
+					<% } %>
+				</ul>
+				<a class="button-collapse" href="#" data-activates="nav-mobile" style="color:floralwhite;">
+					<i class="material-icons" style="color: #47476b;">menu</i>
+				</a>
+			</div>
+		</nav>

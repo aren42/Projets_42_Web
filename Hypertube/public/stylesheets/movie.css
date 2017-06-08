@@ -1,0 +1,53 @@
+/*@font-face {
+    font-family: 'DK_Knucklebones';
+    src: url(public/fonts/DK_Knucklebones.otf);
+}*/
+
+.page {
+    color: #ccccff;
+}
+
+.col-md-6 {
+    width: 40%;
+    margin: 3%;
+    padding: 3%;
+    margin-right: 3% !important;
+}
+
+.infox {
+    background-color: rgba(0, 0, 0, 0.6) !important;
+    font-size: large;
+    overflow: auto;
+}
+
+.title {
+    font-family: DK_Knucklebones;
+    text-align: center;
+    color: #ccccff;
+    margin-top: 5%;
+}
+
+.poster img {
+    height: 700px;
+    width: 550px;
+}
+
+.poster {
+    background-color: rgba(0, 0, 0, 0.6) !important;
+    border: none;
+    padding: 5%;
+}
+
+.poster:hover {
+    background-color: rgba(0, 0, 0, 0.6) !important;
+}
+
+/* Video */
+
+.vjs-big-play-button {
+    top: 40% !important;
+    left: 40% !important;
+}
+.hypHide{
+    display: none;
+}

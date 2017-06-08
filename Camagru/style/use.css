@@ -1,0 +1,34 @@
+/* Change Login */
+
+.form_login {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	width: 50%;
+	margin-top: 1.5em;
+	margin-bottom: 1.5em;
+	padding-top: 0.5em;
+	padding-bottom: 0.5em;
+	text-align: center;
+	font-size: 2em;
+	border-style: solid;
+	border-width: 0.033em 0.033em 0.033em 0.033em;
+	border-color: rgba(146, 91, 91, 0.2);
+	background-color: rgba(249, 175, 175, 0.2);
+}
+
+.input {
+	text-align: center;
+	margin-top: 5%;
+}
+
+.button {
+	text-align: center;
+	margin-bottom: 3%;
+}
+
+.link {
+	color: black;
+}
+

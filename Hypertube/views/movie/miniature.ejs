@@ -1,0 +1,40 @@
+<div class="col-sm-12 col-md-6">
+		<div class="col-sm-4">
+			<div class="thumbnail movie-tile">
+        <% if (locals.movie.imdb) { %>
+          <img src="<%= movie.imdb.poster =%>" alt="<%= movie.title =%>">
+        <% } else { %>
+			    <img src="<%= movie.large_cover_image =%>" alt="<%= movie.title =%>">
+        <% } %>
+			</div>
+			<p>
+			  <a href="/movie/play/<%= movie.id =%>" class="btn btn-primary" role="button">See</a>
+			</p>
+			<% if (locals.movie.seen) { %>
+			  <span class="label label-info">Seen</span>
+			<% } %>
+      <% if (locals.movie.online) { %>
+			  <span class="label label-info">Online</span>
+			<% } %>
+		</div>
+		<div class="col-sm-6 caption-wrapper">
+		  <div class="caption">
+		    <h3><%= movie.title =%></h3>
+				<h4>Année : <%= movie.year =%></h4>
+        <% if (locals.movie.imdb) { %>
+          <h4>Rating : <%= movie.imdb.rating =%></h4>
+        <% } else { %>
+			    <h4>Rating : <%= movie.rating =%></h4>
+        <% } %>
+	  </div>
+		<br>
+	</div>
+<style>
+.movie-tile img {
+	 height: 200px;
+	 width: 130px;
+}
+.caption-wrapper {
+	height: 420px;
+}
+</style>

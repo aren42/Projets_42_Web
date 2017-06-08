@@ -1,0 +1,252 @@
+<!-- views/compte.ejs -->
+<% include body/header.ejs %>
+<div class="modal keke" id="visits_modal">
+	<div class="modal-content">
+		<row class="section">
+			<h4 class="center">Dernières visites</h4>
+			<form class="col">
+				<row>
+					<div class="progress" id="progress_visits">
+						<div class="indeterminate"></div>
+					</div>
+					<div class="collection" id="visits_list"></div>
+				</row>
+			</form>
+		</row>
+	</div>
+</div>
+<div class="modal keke" id="blockeds_modal">
+	<div class="modal-content">
+		<row class="section">
+			<h4 class="center">Utilisateurs bloqués</h4>
+			<form class="col">
+				<row>
+					<div class="progress" id="progress_blockeds">
+						<div class="indeterminate"></div>
+					</div>
+					<div class="collection" id="blockeds_list"></div>
+				</row>
+			</form>
+		</row>
+	</div>
+</div>
+<div class="modal keke" id="likes_modal">
+	<div class="modal-content">
+		<row class="section">
+			<h4 class="center">Utilisateurs qui ont aimé ton profil</h4>
+			<form class="col">
+				<row>
+					<div class="progress" id="progress_likes">
+						<div class="indeterminate"></div>
+					</div>
+					<div class="collection" id="likes_list"></div>
+				</row>
+			</form>
+		</row>
+	</div>
+</div>
+<main>
+	<div class="modal" id="add_tags_modal">
+		<div class="modal-content">
+			<row class="section">
+				<h4 class="center">Ajouter un nouveau #tag ?</h4>
+				<form class="col">
+					<row>
+						<div class="input-field row">
+							<input class="validate" id="new_tag" type="text">
+							<label>Tag</label>
+						</div>
+						<div class="progress" id="progress_new_tag" style="display: none;">
+							<div class="indeterminate"></div>
+						</div>
+						<div class="center">
+							<button class="btn" id="submit_new_tags">Add</button>
+						</div>
+					</row>
+				</form>
+			</row>
+		</div>
+	</div>
+	<div class="modal" id="add_image_modal">
+		<div class="modal-content">
+			<row class="section">
+				<h4 class="center">Ajouter une nouvelle photo de profil ?</h4>
+				<form class="col">
+					<row>
+						<div class="input-field file-field row">
+							<div class="btn">
+								<span>File</span>
+								<input class="valide" id="image_input" type="file" accept="image/*">
+							</div>
+							<div class="file-path-wrapper">
+								<input class="file-path validate" type="text">
+							</div>
+						</div>
+						<br>
+						<div class="progress" id="progress_new_image" style="display: none;">
+							<div class="indeterminate"></div>
+						</div>
+						<div class="center">
+							<button class="btn" id="submit_new_image">Upload</button>
+						</div>
+					</row>
+				</form>
+			</row>
+		</div>
+	</div>
+	<div class="row">
+		<div class="container">
+			<% if (user.picture) { %>
+				<img class="circle responsive-img profile_pic center-block" src='<%= user.picture %>'>
+			<% } else { %>
+				<img class="circle responsive-img profile_pic center-block" src="/img/avatar_default.png">
+			<% } %>
+			<div class="listing">
+			<a class="waves-effect waves-light btn profile_btn blue lighten-1" onclick="list_visits(); $('#visits_modal').openModal();"  id="id_name" value='<%= user.id %>'>Visites
+					<i class="material-icons left">visibility</i></a>
+			<a class="waves-effect waves-light btn profile_btn indigo lighten-1" onclick="list_blockeds(); $('#blockeds_modal').openModal();"  id="id_name_b" value='<%= user.id %>'>Bloqués
+					<i class="material-icons left">visibility</i></a>
+			<a class="waves-effect waves-light btn profile_btn light-pink lighten-1" onclick="list_likes(); $('#likes_modal').openModal();"  id="id_name_c" value='<%= user.id %>'>Likes
+					<i class="material-icons left">visibility</i></a>
+			</div>
+			<form class="col s12" id="profile_form">
+				<row>
+					<div class="input-field col s4">
+						<i class="material-icons prefix">assignment_ind</i>
+						<input class="validate" id="username_profile" type="text" value='<%= user.username %>'>
+						<label>Pseudo</label>
+					</div>
+					<div class="input-field col s4">
+						<i class="material-icons prefix">assignment_ind</i>
+						<input class="validate" id="lastname_profile" type="text" value='<%= user.lastname %>'>
+						<label>Nom</label>
+					</div>
+					<div class="input-field col s4">
+						<i class="material-icons prefix">assignment_ind</i>
+						<input class="validate" id="firstname_profile" type="text" value='<%= user.firstname %>'>
+						<label>Prénom</label>
+					</div>
+					<div class="input-field col s6">
+						<i class="material-icons prefix">email</i>
+						<input class="validate" id="email_profile" type="email" value='<%= user.mail %>'>
+						<label for="age_profile">Email</label>
+					</div>
+					<div class="input-field col s6">
+						<i class="material-icons prefix">cake</i>
+						<input class="validate" id="age_profile" type="number" value='<%= user.age %>'>
+						<label for="age_profile">Âge</label>
+					</div>
+					<div class="input-field col s6">
+						<i class="material-icons prefix">vpn_key</i>
+						<input class="validate" id="oldpassword_profile" type="password">
+						<label class="password_profile">Ancien mot de passe</label>
+					</div>
+					<div class="input-field col s6">
+						<i class="material-icons prefix">vpn_key</i>
+						<input class="validate" id="password_profile" type="password">
+						<label>Nouveau mot de passe</label>
+					</div>
+					<div class="input-field col s6">
+						<i class="material-icons prefix">face</i>
+						<select class="" id="gender_profile">
+							<% if (user.gender == "MEN") { %>
+								<option class="selected">MEN</option>
+								<option>WOMEN</option>
+							<% } else if (user.gender == "WOMEN") { %>
+								<option class="selected">WOMEN</option>
+								<option>MEN</option>
+							<% } else { %>
+								<option class="disabled selected">Inconnu</option>
+								<option>MEN</option>
+								<option>WOMEN</option>
+							<% } %>
+						</select>
+						<label>Sexe</label>
+					</div>
+					<div class="input-field col s6">
+						<i class="material-icons prefix">favorite</i>
+						<select class="" id="orientation_profile">
+							<% if (user.orientation == "HOMOSEXUAL") { %>
+								<option class="selected">HOMOSEXUAL</option>
+								<option>BISEXUAL</option>
+								<option>HETEROSEXUAL</option>
+							<% } else if (user.orientation == "HETEROSEXUAL") { %>
+								<option class="selected">HETEROSEXUAL</option>
+								<option>BISEXUAL</option>
+								<option>HOMOSEXUAL</option>
+							<% } else if (user.orientation == "BISEXUAL") { %>
+								<option class="selected">BISEXUAL</option>
+								<option>HOMOSEXUAL</option>
+								<option>Hétérosexuelle</option>
+							<% } else { %>
+								<option class="selected">BISEXUAL</option>
+								<option>HOMOSEXUAL</option>
+								<option>HETEROSEXUAL</option>
+							<% } %>
+						</select>
+						<label>Orientation</label>
+					</div>
+					<div class="input-field col s12">
+						<i class="material-icons prefix">mode_edit</i>
+						<textarea class="materialize-textarea" id="bio_profile" length="250"><%= user.bio %></textarea>
+						<label>Bio</label>
+					</div>
+					<div class="input-field col s12">
+						<h6>Intérêts</h6>
+						<div class="card" id="tags_lit">
+							<% if (tags.length <= 0) { %>
+								<p>Choisir des #tags</p>
+							<% } %>
+							<% for (val of tags) { %>
+								<div class="tagou" id='<%= val.id %>'><%= val.name %>
+									<i class="material-icons" onclick="delete_tag(this);">close</i>
+								</div>
+							<% } %>
+							<a class="btn-floating waves-effect waves-light light-pink right" id="add_tags">
+								<i class="material-icons">add</i>
+							</a>
+						</div>
+					</div>
+					<div class="input-field col s12" id="map_profile">
+						<h6>Localisation</h6>
+						<div class="card" id="map" loc='<%= user.location %>'></div>
+						<a class="btn waves-effect waves-light light-pink" id="update_loc">Actualiser</a>
+					</div>
+					<div class="input-field col s12">
+						<h6>Photos</h6>
+						<div class="center" id="images_card">
+							<ul>
+								<% for (val of images) { %>
+									<li class="card small" id="image">
+										<div class="card-image">
+											<img src='<%= val.img %>'>
+										</div>
+										<div class="card-action">
+											<p class="blue-text">
+												<a class="waves-effect waves-light" id="love_image" img='<%= val.id %>' onclick="favorite_image(this);">
+													<i class="material-icons">account_circle</i> profil
+												</a>
+												<a class="waves-effect waves-light right" id="delete_image" img='<%= val.id %>' onclick="delete_image(this);">
+													<i class="material-icons">delete</i>
+												</a>
+											</p>
+										</div>
+									</li>
+								<% } %>
+								<% if (images.length != 5) { %>
+									<li>
+										<a class="btn light-pink waves-effect waves-light" id="add_image" onclick="$('#add_image_modal').openModal();">
+											<i class="material-icons">add_a_photo</i>
+										</a>
+									</li>
+								<% } %>
+							</ul>
+						</div>
+					</div>
+				</row>
+			</form>
+		</div>
+	</div>
+</main>
+<% include body/footer.ejs %>
+<% include body/chat.ejs %>

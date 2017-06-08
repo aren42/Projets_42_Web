@@ -1,0 +1,404 @@
+
+
+/* Page Rechercher */
+
+.type {
+	color: #48486a;
+	margin-bottom: -5px;
+}
+
+#search_user {
+	background-color: #ffe6e6;
+	border: 0;
+	color: black;
+}
+
+#color_search label i {
+	color: black;
+}
+
+#collection_search .collection-item {
+	padding: 0;
+	display: flex;
+	margin: 20px;
+}
+
+#collection_search .collection-item p {
+	color: #666699;
+	size: 50%;
+	margin-top: 40px;
+	margin-left: 20px;
+	margin-bottom: 0;
+}
+
+a.collection-item img {
+	height: 100%;
+	max-height: 1000px;
+	max-width: 100px;
+	border-radius: 2px;
+}
+
+/*
+** TEST Page Recherche
+*/
+
+.textu {
+	font-size: 1rem;
+	text-align: center;
+	margin-top: 5px;
+}
+
+a.cardi img {
+	height: 100%;
+	height: 200px;
+	width: 200px;
+	border-radius: 2px;
+/*	border-radius: 25px 25px 0px 0px; */
+	
+}
+
+.cardi {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+	height: 250px;
+	width: 200px;
+	display: inline-block;
+	background-color: #ffe6e6;
+	margin: 20px;
+/*	border-radius: 25px 25px 25px 25px; */
+}
+
+.cardi:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+	background-color: #ffb3b3;
+}
+
+.containu {
+    padding: 2px 16px;
+}
+
+/* Page Suggestion */
+
+.kion a.collection-item:not(.active):hover {
+  background-color: #ffe6e6;
+}
+
+.kion .collection-item {
+  background-color: #f2f2f2;
+  line-height: 1.5rem;
+  padding: 10px 20px;
+  margin: 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.kion {
+	min-width: 250px;
+	margin: 0.5rem 0 1rem 0;
+	border: 1px solid #e0e0e0;
+	overflow: hidden;
+	border-radius: 2px;
+}
+
+#collection_suggest .collection-item {
+	display: flex;
+	margin: 20px;
+}
+
+#collection_suggest .collection-item p {
+	color: #666699;
+	size: 50%;
+	margin-top: 40px;
+	margin-left: 20px;
+	margin-bottom: 0;
+}
+
+
+
+/* Page Compte */
+
+.listing {
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+.profilepic {
+	width: 150px;
+	margin-left: 45%;
+	margin-top: 20px;
+}
+
+
+.tagou {
+	display: inline-block;
+	margin: 10px;
+	font-size: 13px;
+	font-weight: 500;
+	height: 32px;
+	line-height: 32px;
+	padding: 0 12px;
+	color: rgba(0,0,0,0.6);
+	border-radius: 16px;
+	background-color: rgba(102, 102, 255, 0.2);
+}
+
+.tagou i.material-icons{
+	cursor: pointer;
+	float: right;
+	font-size: 16px;
+	line-height: 32px;
+	padding-left: 8px;
+}
+
+#add_tags {
+	margin-top: 5px;
+	margin-right: 5px;
+}
+
+#tags_list {
+	min-height: 50px;
+}
+
+#map {
+	margin: auto;
+    width: 100%;
+    height: 150px;
+}
+
+#update_loc {
+    position: absolute;
+    right: 20px;
+    top: 40px;
+}
+
+#images_card {
+	min-height: 220px;
+	margin-bottom: 50px;
+}
+
+#images_card ul {
+	list-style-type:none;
+	white-space:nowrap;
+	overflow-x:auto;
+	margin: 0;
+}
+.card-image  {
+	max-height: 100%!important;
+	max-width: 100%!important;
+}
+
+.card-image img{
+	height: 220px;
+	width: 220px;
+}
+
+.card-action  {
+	padding-top: 10px!important;
+	padding-top: 10px!important;
+}
+
+#image {
+	margin: 5px;
+	display: inline-block;
+	height: 300px; 
+	width: 220px;
+}
+
+#add_image {
+	margin: 5px!important;
+	display: inline-block!important;
+	min-height: 300px!important; 
+	min-width: 220px!important;
+}
+
+#add_image i {
+	font-size: 50px;
+    margin-top: 75%;
+}
+
+
+/* Page Profil */
+
+#btnprofile {
+	margin-top: 30px;	
+}
+    
+
+.profile_btn {
+	margin: 5px;	
+}
+
+
+.profile_pic {
+	width: 150px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+#btnprofile p {
+	margin: 5px;
+	font-size: 15px;
+	color: rgba(0, 0, 0, 0.5);
+    font-style: italic;
+}
+
+#image_profile {
+	margin: 5px;
+	display: inline-block;
+	height: 200px; 
+	width: 200px;
+}
+
+#image_profile img {
+	height: 100%; 
+	width: 100%;
+}
+
+
+
+/*
+** CHAT - MESSAGES - USERS
+*/
+
+/* Chat */
+
+.chat_box{
+	position:fixed;
+	right:20px;
+	bottom:0px;
+	width:250px;
+	box-shadow: 0px 8px 4px;
+	z-index: 1000;
+	border-radius: 25px 25px 0px 0px;
+}
+
+.chat_body{
+	display: none;
+	background: floralwhite;
+	height: 200px;
+	padding:5px 0px;
+}
+
+.chat_head, .msg_head{
+	text-align: center;
+	color: white;
+	padding: 15px;
+	cursor: pointer;
+	border-radius: 25px 25px 0px 0px;
+}
+
+/* Messages */
+
+.msg_a{
+	position:relative;
+	background:#efeff5;
+	padding:10px;
+	min-height:10px;
+	margin-bottom:5px;
+	margin-right:10px;
+	border-radius:5px;
+}
+
+.msg_a:before{
+	content:"";
+	position:absolute;
+	width:0px;
+	height:0px;
+	border: 10px solid;
+	border-color: transparent #efeff5 transparent transparent;
+	left:-20px;
+	top:7px;
+}
+
+.msg_b{
+	color: #46466d;
+	background: #99ccff;
+	padding:10px;
+	min-height:15px;
+	margin-bottom:5px;
+	position:relative;
+	margin-left:10px;
+	border-radius:5px;
+	word-wrap: break-word;
+}
+
+.msg_b:after{
+	content:"";
+	position:absolute;
+	width:0px;
+	height:0px;
+	border: 10px solid;
+	border-color: transparent transparent transparent #99ccff;
+	right:-20px;
+	top:7px;
+}
+
+
+.msg_box{
+	z-index: 1000;
+	position:fixed;
+	right: 290px;
+	bottom:-5px;
+	width:250px;
+	background: #e6f2ff;
+	box-shadow: 0px 8px 4px;
+	border-radius: 25px 25px 0px 0px;
+}
+
+.msg_head{
+	background:#3498db;
+}
+
+.msg_body{
+	background:white;
+	height:200px;
+	font-size:12px;
+	padding:15px;
+	overflow:auto;
+	overflow-x: hidden;
+}
+
+.msg_input{
+	width:100%;
+	border: 1px solid white;
+	border-top:1px solid #DDDDDD;
+	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
+	box-sizing: border-box;  
+}
+
+/* Users */
+
+.user_online, .user_offline{
+	position:relative;
+	padding:10px 30px;
+	color: #666699;
+}
+
+.user:hover, .user_offline:hover{
+	color: #b3b3cc;
+	background:#f8f8f8;
+	cursor:pointer;
+
+}
+
+.user_online:before{
+	content:'';
+	position:absolute;
+	background:#2ecc71;
+	height:10px;
+	width:10px;
+	left:10px;
+	top:15px;
+	border-radius: 50%;
+}
+
+.user_offline:before{
+	content:'';
+	position:absolute;
+	background: red;
+	height:10px;
+	width:10px;
+	left:10px;
+	top:15px;
+	border-radius: 50%;
+}

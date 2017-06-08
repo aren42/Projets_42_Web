@@ -1,0 +1,54 @@
+<!-- views/suggestions.ejs -->
+<% include body/header.ejs %>
+<main>
+	<div class="row">
+		<div class="container">
+			<div class="col s12">
+				<row>
+					<h3 class="center">Liste des suggestions</h3>
+					<div class="input-field col s12 range-field" style="margin-top: 0px;">
+						<p class="type">Âge :</p>
+						<div id="age_interval_suggest"></div>
+					</div>
+					<div class="input-field col s12 range-field" style="margin-top: 0px;">
+						<p class="type">Popularité :</p>
+						<div id="score_interval_suggest"></div>
+					</div>
+					<div class="input-field col s12 range-field" style="margin-top: 0px;">
+						<p class="type">Distance :</p>
+						<div id="distance_interval_suggest"></div>
+					</div>
+					<div class="input-field col s6 range-field" style="margin-top: 0px;">
+					<br>
+						<p class="type">Tags d'intérêts :</p>
+						<select multiple id="select_tags_suggest">
+							<option selected disabled>Sélectionner</option>
+							<% for (val of tags) { %>
+								<option value='<%= val.name %>' id='<%= val.id %>'><%= val.name %></option>
+							<% } %>
+						</select>
+					<br>
+					</div>
+					<div class="input-field col s6 range-field" style="margin-top: 0px;">
+					<br>
+						<p class="type">Trier par :</p>
+						<select id="order_by_suggest">
+							<option selected value="ponderation">Pondere</option>
+							<option value="age">Âge</option>
+							<option value="distance">Localisation</option>
+							<option value="popularite">Popularité</option>
+							<option value="tags">Tags</option>
+						</select>
+					<br>
+					</div>
+					<div class="progress" id="progress_suggest" style="display: none;">
+						<div class="indeterminate"></div>
+					</div>
+					<div class="kion" id="collection_suggest" style="display: none;"></div>
+				</row>
+			</div>
+		</div>
+	</div>
+</main>
+<% include body/footer.ejs %>
+<% include body/chat.ejs %>
